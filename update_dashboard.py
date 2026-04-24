@@ -442,21 +442,6 @@ def generate_dashboard_html(quiz_data):
         </table>
         <div class="note">Joint winners occurred in {sum(1 for w in winners if w['joint'])} rounds.</div>
       </div>
-      <div class="card">
-        <h3 class="table-title">Grand Prix Winners by Round</h3>
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Set</th>
-              <th>Topic</th>
-              <th>Winner(s)</th>
-              <th>Top Score</th>
-            </tr>
-          </thead>
-          <tbody>
-{winners_table_html}          </tbody>
-        </table>
-      </div>
     </section>
 
     <section class="section">
