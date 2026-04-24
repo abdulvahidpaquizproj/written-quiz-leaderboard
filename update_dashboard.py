@@ -177,7 +177,7 @@ def generate_dashboard_html(quiz_data):
             class_attr = ' class="top-score"' if is_top else ''
             results_rows_html += f"<td{class_attr}>{score}</td>"
         results_rows_html += f"""
-              <td>{int(max_score)}</td>
+              <td>{int(float(row.get('Maximum Score', 0) or 0))}</td>
             </tr>
 """
     
@@ -334,7 +334,7 @@ def generate_dashboard_html(quiz_data):
   <div class="page">
     <header>
       <h1>Vahid's Written Quiz Season 1</h1>
-      <p class="subheading">Live dashboard synced from Google Sheets. Drivers' Championship, Constructors' Championship, Grand Prix wins, and full quiz results.</p>
+      <p class="subheading">Drivers' Championship, Constructors' Championship, Grand Prix wins, and Full Quiz Results.</p>
     </header>
 
     <section class="section">
@@ -395,7 +395,7 @@ def generate_dashboard_html(quiz_data):
     
     html += f"""      </div>
       <div class="callout">
-        <strong>Constructors' winner:</strong> {winner_team} with a {winner_score}–{runner_up_score} lead.
+        <strong>Constructors' Leader:</strong> {winner_team} with a {winner_score}–{runner_up_score} lead.
       </div>
     </section>
 
@@ -403,7 +403,7 @@ def generate_dashboard_html(quiz_data):
       <div class="section-header">
         <div>
           <h2>Grand Prix Wins</h2>
-          <p class="note">Each quiz round is treated as a Grand Prix; joint victories are included.</p>
+          <p class="note">Joint victories are included.</p>
         </div>
       </div>
       <div class="card">
