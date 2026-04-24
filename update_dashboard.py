@@ -180,6 +180,16 @@ def generate_dashboard_html(quiz_data):
               <td>{int(float(row.get('Maximum Score', 0) or 0))}</td>
             </tr>
 """
+    # Build total row in the full results table
+    total_max = sum(float(row.get('Maximum Score', 0) or 0) for row in quiz_rows)
+    results_rows_html += f"""            <tr style="font-weight:700; border-top: 2px solid rgba(148,163,184,0.3);">
+              <td colspan="2">Total</td>"""
+    for p in players:
+        results_rows_html += f"<td>{player_totals[p]}</td>"
+    results_rows_html += f"""
+              <td>{int(total_max)}</td>
+            </tr>
+"""
     
     # Build winners table
     winners_table_html = ""
