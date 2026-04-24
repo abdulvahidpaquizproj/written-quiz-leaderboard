@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vahid's Written Quiz Season 1 Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      color: #f8fafc;
+    }
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+      margin-bottom: 32px;
+    }
+    .subheading {
+      margin-top: 8px;
+      color: #94a3b8;
+    }
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.88);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+    }
+    .metric {
+      font-size: 3rem;
+      line-height: 1;
+      margin: 0;
+      color: #f8fafc;
+    }
+    .metric-label {
+      color: #94a3b8;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+    .leaderboard-table,
+    .results-table,
+    .wins-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+    .leaderboard-table th,
+    .leaderboard-table td,
+    .results-table th,
+    .results-table td,
+    .wins-table th,
+    .wins-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+      text-align: left;
+    }
+    .leaderboard-table th,
+    .results-table th,
+    .wins-table th {
+      background: rgba(15, 23, 42, 0.95);
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+    .top-score {
+      background: rgba(16, 185, 129, 0.18);
+      color: #a7f3d0;
+      font-weight: 700;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .section-header h2 {
+      margin-bottom: 8px;
+    }
+    .note {
+      color: #94a3b8;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .callout {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.18);
+      color: #e2e8f0;
+    }
+    .small-text {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+    .table-title {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #e2e8f0;
+    }
+    .results-table tbody tr:nth-child(odd) {
+      background: rgba(148, 163, 184, 0.03);
+    }
+    .results-table tbody tr:hover {
+      background: rgba(100, 116, 139, 0.16);
+    }
+    .updated-at {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(148, 163, 184, 0.12);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Vahid's Written Quiz Season 1</h1>
+      <p class="subheading">Live dashboard synced from Google Sheets. Drivers' Championship, Constructors' Championship, Grand Prix wins, and full quiz results.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Drivers' Championship Leaderboard</h2>
+          <p class="note">Ranks based on total individual scores across all quiz rounds.</p>
+        </div>
+      </div>
+      <div class="card">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Driver</th>
+              <th>Total Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Akhil</td>
+              <td class="top-score">93</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jameer</td>
+              <td>79</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Nadeem</td>
+              <td>68</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Ameen</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Sreehari</td>
+              <td>55</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Constructors' Championship Results</h2>
+          <p class="note">Team totals are the sum of their members' scores over all quiz rounds.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <p class="metric">183</p>
+          <p class="metric-label">Khiladis of Kerala</p>
+        </div>
+        <div class="card">
+          <p class="metric">172</p>
+          <p class="metric-label">Victoria's Secrets</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Constructors' winner:</strong> Khiladis of Kerala with a 183–172 lead.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Grand Prix Wins</h2>
+          <p class="note">Each quiz round is treated as a Grand Prix; joint victories are included.</p>
+        </div>
+      </div>
+      <div class="card">
+        <table class="wins-table">
+          <thead>
+            <tr>
+              <th>Driver</th>
+              <th>Grand Prix Wins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jameer</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>Akhil</td>
+              <td class="top-score">6</td>
+            </tr>
+            <tr>
+              <td>Sreehari</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Ameen</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Nadeem</td>
+              <td>5</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note">Joint winners occurred in 3 rounds.</div>
+      </div>
+      <div class="card">
+        <h3 class="table-title">Grand Prix Winners by Round</h3>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Topic</th>
+              <th>Winner(s)</th>
+              <th>Top Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mixed Bag</td>
+              <td>Jameer</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>US States and Cities</td>
+              <td>Akhil &amp; Nadeem</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mixed Bag</td>
+              <td>Jameer &amp; Akhil</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Sporting Firsts</td>
+              <td>Ameen</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Back to Basics</td>
+              <td>Akhil</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Business</td>
+              <td>Jameer</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Mixed Bag</td>
+              <td>Akhil</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Mixed Bag</td>
+              <td>Akhil</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>One-liners</td>
+              <td>Akhil &amp; Nadeem</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Mixed Bag</td>
+              <td>Nadeem</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Mixed Bag</td>
+              <td>Nadeem</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Asian Food</td>
+              <td>Nadeem</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Mixed Bag</td>
+              <td>Jameer</td>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2>Full Quiz Results</h2>
+          <p class="note">Each round includes the score of every driver. Top scorers are highlighted.</p>
+        </div>
+      </div>
+      <div class="card">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Topic</th>
+              <th>Jameer</th>
+              <th>Akhil</th>
+              <th>Sreehari</th>
+              <th>Ameen</th>
+              <th>Nadeem</th>
+              <th>Max Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mixed Bag</td><td class="top-score">10</td><td>9</td><td>7</td><td>5</td><td>4</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>US States and Cities</td><td>5</td><td class="top-score">10</td><td>5</td><td>5</td><td class="top-score">10</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mixed Bag</td><td class="top-score">6</td><td class="top-score">6</td><td>3</td><td>2</td><td>4</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Sporting Firsts</td><td>4</td><td>7</td><td>7</td><td class="top-score">8</td><td>4</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Back to Basics</td><td>4</td><td class="top-score">6</td><td>3</td><td>4</td><td>4</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Business</td><td class="top-score">7</td><td>6</td><td>2</td><td>4</td><td>1</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Mixed Bag</td><td>6</td><td class="top-score">11</td><td>4</td><td>5</td><td>4</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Mixed Bag</td><td>6</td><td class="top-score">9</td><td>5</td><td>7</td><td>6</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>One-liners</td><td>5</td><td class="top-score">6</td><td>2</td><td>5</td><td class="top-score">6</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Mixed Bag</td><td>3</td><td>2</td><td>0</td><td>2</td><td class="top-score">4</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Mixed Bag</td><td>5</td><td>4</td><td>3</td><td>6</td><td class="top-score">7</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Asian Food</td><td>6</td><td>6</td><td>3</td><td>2</td><td class="top-score">7</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Mixed Bag</td><td class="top-score">12</td><td>11</td><td>11</td><td>5</td><td>7</td>
+              <td>12</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="updated-at">
+      Dashboard auto-generated from Google Sheets
+    </div>
+  </div>
+</body>
+</html>
