@@ -182,10 +182,13 @@ def generate_dashboard_html(quiz_data):
 """
     # Build total row in the full results table
     total_max = sum(float(row.get('Maximum Score', 0) or 0) for row in quiz_rows)
+    top_total = max(player_totals[p] for p in players)
     results_rows_html += f"""            <tr style="font-weight:700; border-top: 2px solid rgba(148,163,184,0.3);">
               <td colspan="2">Total</td>"""
     for p in players:
-        results_rows_html += f"<td>{player_totals[p]}</td>"
+        is_leader = player_totals[p] == top_total
+        class_attr = ' class="top-score"' if is_leader else ''
+        results_rows_html += f"<td{class_attr}>{player_totals[p]}</td>"
     results_rows_html += f"""
               <td>{int(total_max)}</td>
             </tr>
@@ -428,8 +431,7 @@ def generate_dashboard_html(quiz_data):
 """
     
     sorted_wins = sorted(win_counts.items(), key=lambda x: x[1], reverse=True)
-    for player in players:
-        wins = win_counts.get(player, 0)
+    for player, wins in sorted_wins:
         is_top = wins == sorted_wins[0][1] if sorted_wins else False
         class_attr = ' class="top-score"' if is_top else ''
         html += f"""            <tr>
